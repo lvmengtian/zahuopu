@@ -1,0 +1,17 @@
+/*目录宽度，避免名称过程被折叠*/
+.wy-side-scroll {
+  width: 400px !important;
+}
+.wy-menu-vertical {
+  width: 350px;
+}
+
+/* 三级目录鼠标滑过之后的样式 */
+.toctree-l3 a:hover{
+  font-weight: bold !important;
+} 
+
+/*调整codeblock 字体大小*/
+.highlight > pre {
+  font-size: 15px !important;
+}
