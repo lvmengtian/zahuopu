@@ -92,7 +92,7 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
 # config custom css
-# html_css_files = ['css/custom.css']
+html_css_files = ['css/custom.css']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
