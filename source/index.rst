@@ -10,3 +10,4 @@
    :maxdepth: 2
 
    src/leetcode/index
+   src/caikeng/index

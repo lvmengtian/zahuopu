@@ -1,0 +1,70 @@
+===================
+readthedocs指北
+===================
+
+问题1：编译失败
+---------------
+在readthedocs进行构建时，构建失败提示信息如下：
+
+.. code-block:: shell
+
+  latexmk -r latexmkrc -pdf -f -dvi- -ps- -jobname=zahuopu -interaction=nonstopmode
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 10) line 1, <GEN1> chunk 1.
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 10) line 2, <GEN1> chunk 1.
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 10) line 3, <GEN1> chunk 1.
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 10) line 4, <GEN1> chunk 1.
+  Subroutine makeglo redefined at (eval 11) line 7, <GEN2> chunk 1.
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 11) line 1, <GEN2> chunk 1.
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 11) line 2, <GEN2> chunk 1.
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 11) line 3, <GEN2> chunk 1.
+  Use of uninitialized value $ENV{"LATEXOPTS"} in concatenation (.) or string at (eval 11) line 4, <GEN2> chunk 1.
+  Latexmk: This is Latexmk, John Collins, 1 January 2015, version: 4.41.
+  File::Glob::glob() will disappear in perl 5.30. Use File::Glob::bsd_glob() instead. at /usr/bin/latexmk line 7482.
+  Rule 'pdflatex': Rules & subrules not known to be previously run:
+    pdflatex
+  Rule 'pdflatex': The following rules & subrules became out-of-date:
+        'pdflatex'
+
+解决方法
+^^^^^^^^^
+参考: `点击这里 <https://github.com/JuliaCN/julia_zh_cn/blob/master/conf.py>`_ 
+需要修改 ``conf.py`` 的latex配置，修改如下：
+
+.. code-block:: python
+
+  # -- Options for LaTeX output ------------------------------------------------
+  latex_elements = {
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    # 'papersize': 'letterpaper',
+
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    # 'pointsize': '10pt',
+
+    # Additional stuff for the LaTeX preamble.
+    #
+    # 'preamble': '',
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
+    'preamble': r'''
+    \hypersetup{unicode=true}
+    \usepackage{CJKutf8}
+    \DeclareUnicodeCharacter{00A0}{\nobreakspace}
+    \DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
+    \DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
+    \DeclareUnicodeCharacter{2286}{\ensuremath{\subseteq}}
+    \DeclareUnicodeCharacter{2713}{x}
+    \DeclareUnicodeCharacter{27FA}{\ensuremath{\Longleftrightarrow}}
+    \DeclareUnicodeCharacter{221A}{\ensuremath{\sqrt{}}}
+    \DeclareUnicodeCharacter{221B}{\ensuremath{\sqrt[3]{}}}
+    \DeclareUnicodeCharacter{2295}{\ensuremath{\oplus}}
+    \DeclareUnicodeCharacter{2297}{\ensuremath{\otimes}}
+    \begin{CJK}{UTF8}{gbsn}
+    \AtEndDocument{\end{CJK}}
+    ''',
+  }
+
+
