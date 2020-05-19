@@ -10,4 +10,5 @@
    :maxdepth: 2
 
    src/leetcode/index
-   src/caikeng/index
+   src/summary/index
+   src/learning-notes/index
