@@ -8,7 +8,7 @@ Leetcode 6. Z字形变换
 
 比如输入字符串为 "LEETCODEISHIRING" 行数为 3 时，排列如下：
 
-.. code-block:: text
+::
 
   L   C   I   R
   E T O E S I I G
@@ -20,7 +20,7 @@ Leetcode 6. Z字形变换
 
 ``string convert(string s, int numRows);``
 
-.. code-block:: text
+::
 
   示例 1:
   输入: s = "LEETCODEISHIRING", numRows = 3
@@ -87,7 +87,7 @@ Leetcode 6. Z字形变换
 
     return ans
 
-.. code-block:: text
+::
 
   来源：力扣（LeetCode）
   链接：https://leetcode-cn.com/problems/zigzag-conversion

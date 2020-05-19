@@ -6,7 +6,7 @@ Leetcode 680. 验证回文字符串 Ⅱ
 ---------
 给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
 
-.. code-block:: text
+::
 
   示例 1:
   输入: "aba"
@@ -63,7 +63,7 @@ Leetcode 680. 验证回文字符串 Ⅱ
     return True, l, r
 
 
-.. code-block:: text
+::
 
   来源：力扣（LeetCode）
   链接：https://leetcode-cn.com/problems/valid-palindrome-ii

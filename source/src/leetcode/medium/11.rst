@@ -41,7 +41,7 @@ Leetcode 11. 盛最多水的容器
             right -= 1
     return max_area
 
-.. code-block:: text
+::
 
   来源：力扣（LeetCode）
   链接：https://leetcode-cn.com/problems/container-with-most-water
