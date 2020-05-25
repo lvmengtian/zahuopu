@@ -1,0 +1,68 @@
+===========================
+Leetcode 146. LRU缓存机制
+===========================
+
+题目描述
+---------
+运用你所掌握的数据结构，设计和实现一个 `LRU (最近最少使用) 缓存机制 <https://baike.baidu.com/item/LRU>`_  。它应该支持以下操作： 获取数据 ``get`` 和 写入数据 ``put`` 。
+
+获取数据 ``get(key)`` : 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。
+
+写入数据 ``put(key, value)`` : 如果密钥已经存在，则变更其数据值；
+如果密钥不存在，则插入该组「密钥/数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。
+
+思路
+---------
+我们维护一个 ``key`` 的队列和一个包含 ``k-v`` 的 ``map``。当某个元素被访问（包含新增、更新、查询）时，
+将该元素移动到队列的头部，当队列满了之后，删除队列尾部的元素。
+
+代码
+---------
+
+.. code-block:: python
+  :linenos:
+
+  class LRUCache(object):
+    def __init__(self, capacity):
+      """
+      :type capacity: int
+      """
+      self.capacity = capacity
+      self.key_list = []
+      self.lru_cache = {}
+
+    def get(self, key):
+      """
+      :type key: int
+      :rtype: int
+      """
+      if key in self.lru_cache:
+          self.move_key_to_first(key)
+          return self.lru_cache.get(key, '-1')
+      else:
+          return -1
+
+    def put(self, key, value):
+      """
+      :type key: int
+      :type value: int
+      :rtype: None
+      """
+      if key in self.lru_cache:
+          self.lru_cache.update({key: value})
+          self.move_key_to_first(key)
+      else:
+          if len(self.lru_cache) == self.capacity:
+              self.lru_cache.pop(self.key_list.pop())
+          self.lru_cache[key] = value
+          self.key_list.insert(0, key)
+
+    def move_key_to_first(self, key):
+      self.key_list.remove(key)
+      self.key_list.insert(0, key)
+
+::
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/lru-cache
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
