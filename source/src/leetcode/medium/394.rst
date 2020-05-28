@@ -1,0 +1,77 @@
+========================
+Leetcode 394. 字符串解码
+========================
+
+题目描述
+---------
+给定一个经过编码的字符串，返回它解码后的字符串。
+
+编码规则为: ``k[encoded_string]``，表示其中方括号内部的 ``encoded_string`` 正好重复 ``k`` 次。注意 ``k`` 保证为正整数。
+
+你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。
+
+此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 ``k`` ，例如不会出现像 ``3a`` 或 ``2[4]`` 的输入。
+
+::
+
+  示例:
+  s = "3[a]2[bc]", 返回 "aaabcbc".
+  s = "3[a2[c]]", 返回 "accaccacc".
+  s = "2[abc]3[cd]ef", 返回 "abcabccdcdcdef".
+
+思路
+---------
+使用2个栈，一个数字栈，一个字符栈。（当然你也可以使用一个栈）
+
+**注意事项:**
+
+- 数字并非是一位，所以需要特殊计算
+
+**操作步骤:**
+
+- 字符是数字时，计算数字
+- 字符是 ``[`` 或者字母时，将字符压入字符栈。
+  
+  - 当字符串是 ``[``，还需要将数字压入数字栈
+- 字符串是 ``]`` 弹栈，直到遇到 ``[``，然后从数字栈弹出拼接字符串，拼接之后继续入栈
+
+代码
+---------
+
+.. code-block:: python
+  :linenos:
+
+  def decodeString(self, s):
+    """
+    :type s: str
+    :rtype: str
+    """
+    count_stack = []
+    str_stack = []
+    count = 0
+    for ch in s:
+      # 注意并非是一位数字，可能是12这种数字
+      if ch.isdigit():
+        count = count * 10 + int(ch)
+      elif ch == '[' or ch.isalpha():
+        # 遇到[时，说明数字计算完毕，数字压入数字栈
+        if ch == '[':
+          count_stack.append(count)
+          count = 0
+        # 遇到[或字符时压入字符栈
+        str_stack.append(ch)
+      elif ch == ']':
+        tmp = ''
+        while str_stack:
+          top = str_stack.pop()
+          if top == '[':
+              break
+          tmp = top + tmp
+        str_stack.append(count_stack.pop() * tmp)
+    return ''.join(str_stack)
+
+::
+
+  来源：力扣（LeetCode）
+  链接：https://leetcode-cn.com/problems/decode-string
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
